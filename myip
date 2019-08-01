@@ -1,0 +1,5 @@
+#!/bin/bash
+myip=`dig +short myip.opendns.com @resolver1.opendns.com`
+#echo $myip
+nslookup $myip |grep -v "server can't find" |grep -v "Authoritative"
+curl -s http://api.db-ip.com/v2/free/$myip |grep -v '{' |grep -v '}'
