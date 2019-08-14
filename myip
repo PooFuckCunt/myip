@@ -1,5 +1,4 @@
 #!/bin/bash
-myip=`dig +short myip.opendns.com @resolver1.opendns.com`
-#echo $myip
+myip=$(wget --timeout=30 http://ipinfo.io/ip -qO -)
+curl -s http://api.db-ip.com/v2/free/$myip |grep -v '{' |grep -v '}' |sed 's/"//g'
 nslookup $myip |grep -v "server can't find" |grep -v "Authoritative"
-curl -s http://api.db-ip.com/v2/free/$myip |grep -v '{' |grep -v '}'
